@@ -1,0 +1,52 @@
+#container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: solid 1px black;
+    width: 250px;
+    grid-gap: 15px;
+    grid-template-areas:
+        "header header header header"
+        "AC AC first sidebar"
+        "two two two sidebar"
+        "three three three sidebar"
+        "four four four sidebar"
+        "zero zero five sidebar"
+
+}
+
+.display {
+    grid-area: header;
+    
+}
+
+.AC {
+    grid-area: AC;
+}
+
+.row-one {
+    grid-area: first;
+}
+
+.row-two {
+    grid-area: two;
+}
+
+.row-three {
+    grid-area: three;
+}
+
+.row-four {
+    grid-area: four;
+}
+
+.row-five {
+    grid-area: five;
+}
+
+.zero {
+    grid-area: zero;
+}
+
+.operator {
+    grid-area: sidebar;
+}
