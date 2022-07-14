@@ -1,11 +1,3 @@
-/*
-
-
-Create a basic HTML calculator with buttons for each digit, each of the above functions and an “Equals” key. 
-Also needs a display and a clear button
-*/ 
-
-
 // Add function
 
 const add = function(a, b)  {
@@ -38,10 +30,71 @@ const divide = function(a, b) {
 
 console.log(divide(6, 2))
 
-// Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
+// Create a new function operate that takes an operator and 2 numbers 
+// and then calls one of the above functions on the numbers.
 
-const operate = function(a, b) {
-    return (add(a, b))
+/*
+const operate = function(operation) {
+    return add(a, b)
+
 }
 
-console.log(operate(10, 2))
+console.log(operate())
+*/
+
+// Number button clicking
+
+const numSeven = document.querySelector(".row-two-7")
+numSeven.addEventListener('click', () => {
+    console.log("7")
+});
+
+const numEight = document.querySelector(".row-two-8")
+numEight.addEventListener('click', () => {
+    console.log("8")
+});
+
+const numNine = document.querySelector(".row-two-9")
+numNine.addEventListener('click', () => {
+    console.log("9")
+});
+
+const numFour = document.querySelector(".row-three-4")
+numFour.addEventListener('click', () => {
+    console.log("4")
+});
+
+const numFive = document.querySelector(".row-three-5")
+numFive.addEventListener('click', () => {
+    console.log("5")
+});
+
+const numSix = document.querySelector(".row-three-6")
+numSix.addEventListener('click', () => {
+    console.log("6")
+});
+
+const numOne = document.querySelector(".row-four-1")
+numOne.addEventListener('click', () => {
+    console.log("1")
+});
+
+const numTwo = document.querySelector(".row-four-2")
+numTwo.addEventListener('click', () => {
+    console.log("2")
+});
+
+const numThree = document.querySelector(".row-four-3")
+numThree.addEventListener('click', () => {
+    console.log("3")
+});
+
+const numZero = document.querySelector(".zero")
+numZero.addEventListener('click', () => {
+    console.log("0")
+});
+
+const decimal = document.querySelector(".row-five-decimal")
+decimal.addEventListener('click', () => {
+    console.log(".")
+});
