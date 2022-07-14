@@ -1,3 +1,11 @@
+body {
+    display: flex;
+    border: solid 1px;
+    justify-content: center;
+    padding: 100px;
+
+}
+
 #container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -17,10 +25,12 @@
 .display {
     grid-area: header;
     height: 50px;
+    font-size: 50px;
+    height: 100px;
     
 }
 
-.AC {
+.all-clear {
     grid-area: AC;
 }
 
@@ -44,7 +54,7 @@
     grid-area: five;
 }
 
-.zero {
+.number-zero {
     grid-area: zero;
 }
 
