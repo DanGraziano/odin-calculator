@@ -1,4 +1,14 @@
-// Add function
+// DOM Elements
+const numberButtons = document.querySelectorAll('.number');
+const operatorButtons = document.querySelectorAll('.operator');
+const allClearButton = document.querySelector('.all-clear');
+const displayValue = document.querySelector('.display');
+const deleteButton = document.querySelector('.delete')
+const equalsButton = document.querySelector('.equals');
+
+
+
+// Sum of a,b
 
 const add = function(a, b)  {
     return a + b;
@@ -6,7 +16,7 @@ const add = function(a, b)  {
 
 console.log(add(1, 5))
 
-// Subtract function
+// Subtract a,b
 
 const subtract = function(a, b) {
     return a - b;
@@ -14,7 +24,7 @@ const subtract = function(a, b) {
 
 console.log(subtract(5, 1))
 
-// Multiply function
+// Multiply a,b
 
 const multiply = function(a, b) {
     return a * b;
@@ -22,10 +32,14 @@ const multiply = function(a, b) {
 
 console.log(multiply(5, 5))
 
-// Divide function
+// Divide a,b
 
 const divide = function(a, b) {
-    return a / b;
+    if( b == 0 ){
+        return NaN
+    } else {
+        return a / b
+    }
 }
 
 console.log(divide(6, 2))
@@ -33,74 +47,24 @@ console.log(divide(6, 2))
 // Create a new function operate that takes an operator and 2 numbers 
 // and then calls one of the above functions on the numbers.
 
-function operate(num1, num2, operator) {
+function operate(a, b, operator) {
     switch (operator) {
       case "+":
-        return add(num1, num2);
+        return add(a, b);
+        break;
       case "-":
-        return subtract(num1, num2);
+        return subtract(a, b);
+        break;
       case "*":
-        return multiply(num1, num2);
+        return multiply(a, b);
+        break;
       case "/":
-        return divide(num1, num2);
+        return divide(a, b);
     }
   };
 
-  console.log(operate(1, 4, "*"))
+  console.log(operate(1, 4, "+"))
 
-// Number button clicking
 
-const numSeven = document.querySelector(".row-two-7")
-numSeven.addEventListener('click', () => {
-    console.log("7")
-});
-
-const numEight = document.querySelector(".row-two-8")
-numEight.addEventListener('click', () => {
-    console.log("8")
-});
-
-const numNine = document.querySelector(".row-two-9")
-numNine.addEventListener('click', () => {
-    console.log("9")
-});
-
-const numFour = document.querySelector(".row-three-4")
-numFour.addEventListener('click', () => {
-    console.log("4")
-});
-
-const numFive = document.querySelector(".row-three-5")
-numFive.addEventListener('click', () => {
-    console.log("5")
-});
-
-const numSix = document.querySelector(".row-three-6")
-numSix.addEventListener('click', () => {
-    console.log("6")
-});
-
-const numOne = document.querySelector(".row-four-1")
-numOne.addEventListener('click', () => {
-    console.log("1")
-});
-
-const numTwo = document.querySelector(".row-four-2")
-numTwo.addEventListener('click', () => {
-    console.log("2")
-});
-
-const numThree = document.querySelector(".row-four-3")
-numThree.addEventListener('click', () => {
-    console.log("3")
-});
-
-const numZero = document.querySelector(".zero")
-numZero.addEventListener('click', () => {
-    console.log("0")
-});
-
-const decimal = document.querySelector(".row-five-decimal")
-decimal.addEventListener('click', () => {
-    console.log(".")
-});
+// Create the functions that populate the display when you click the number buttons. 
+// You should be storing the ‘display value’ in a variable somewhere for use in the next step.
