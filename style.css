@@ -54,10 +54,10 @@ body {
     grid-area: five;
 }
 
-.number-zero {
+#zero {
     grid-area: zero;
 }
 
-.operator {
+#divide #multiply #subtract #add {
     grid-area: sidebar;
 }
