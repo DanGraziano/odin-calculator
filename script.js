@@ -6,71 +6,55 @@ const displayValue = document.querySelector('.display');
 const deleteButton = document.querySelector('.delete')
 const equalsButton = document.querySelector('.equals');
 
-// Sum of a,b
+// Global variables
 
-const add = function(a, b)  {
-    return a + b;
+let num1 = ""
+let num2 = ""
+let operator = ""
+let savedFirstNumber = ""
+let tempNum1Array = []
+let tempNum2Array = []
+let tempOperatorArray = []
+
+// Math functions for adding, subtracting, multiplying, and dividing
+
+const add = function(num1, num2)  {
+    return num1 + num2;
 }
 
-console.log(add(1, 5))
-
-// Subtract a,b
-
-const subtract = function(a, b) {
-    return a - b;
+const subtract = function(num1, num2) {
+    return num1 - num2;
 }
 
-console.log(subtract(5, 1))
-
-// Multiply a,b
-
-const multiply = function(a, b) {
-    return a * b;
+const multiply = function(num1, num2) {
+    return num1 * num2;
 }
 
-console.log(multiply(5, 5))
-
-// Divide a,b
-
-const divide = function(a, b) {
-    if( b == 0 ){
-        return NaN
+const divide = function(num1, num2) {
+    if( num2 == 0 ){
+        return "Error: You can't divide by 0. Press AC and try again"
     } else {
-        return a / b
+        return num1 / num2
     }
 }
 
-console.log(divide(6, 2))
+// Overall function to choose proper math function
 
-// Create a new function operate that takes an operator and 2 numbers 
-// and then calls one of the above functions on the numbers.
-
-function operate(a, b, operator) {
+function operate(num1, num2, operator) {
     switch (operator) {
       case "+":
-        return add(a, b);
+        return add(num1, num2);
         break;
       case "-":
-        return subtract(a, b);
+        return subtract(num1, num2);
         break;
-      case "*":
-        return multiply(a, b);
+      case "x":
+        return multiply(num1, num2);
         break;
       case "/":
-        return divide(a, b);
+        return divide(num1, num2);
     }
   };
-
-  console.log(operate(1, 4, "+"))
-
-
-// Create the functions that populate the display when you click the number buttons. 
-// You should be storing the ‘display value’ in a variable somewhere for use in the next step.
-
-// Need the numbers to appear in the output. 
-// Maybe change innerHTML? Based on the button click? 
-// But then how do we keep from changing each time for when we need 
-// multiple clicks like the number 50 or 100?
 
 allClearButton.addEventListener('click', function() {
     console.log("All clear");
@@ -82,39 +66,56 @@ deleteButton.addEventListener('click', function() {
     // Needs ability to delete previous number only
 });
 
-equalsButton.addEventListener('click', function() {
-    console.log("=");
-    a = parseFloat(a);
-    b = parseFloat(b);
-    operate(a, b, operator);
-    // Needs ability to have a = first button press and b = second one after operator
 
-})
+function runCalculator() {
+     // Number button click that returns the number
+    function getNumbersClicked() {
+        numberButtons.forEach(numberButtons => {
+            numberButtons.addEventListener('click', () => {
+                savedFirstNumber = numberButtons.value
+                // Get first number before operator has been clicked
+                if (operator == "")  {
+                    tempNum1Array.push(savedFirstNumber);
+                    num1 = tempNum1Array.join("");
+                    displayValue.innerHTML = num1;
+                } 
+                
+                else {
 
- // Number button click that returns the number
+                // Get second number after operator has been clicked
+                    tempNum2Array.push(savedFirstNumber);
+                    num2 = tempNum2Array.join("");
+                    displayValue.innerHTML = num2;
+                }
 
- numberButtons.forEach(numberButtons => {
-    numberButtons.addEventListener('click', () => {
-        displayValue.innerHTML = numberButtons.value
-        console.log(numberButtons.value);
-    });
- });
-
+            });
+        });
+    }    
 // Operator button click return the operator
+    function getOperator() {   
+        operatorButtons.forEach(operatorButtons => {
+            operatorButtons.addEventListener('click', () => {
+                operator = operatorButtons.value
+                displayValue.textContent = operatorButtons.value
+                tempOperatorArray.push(operator);
+            });
+        });
+    }
 
-operatorButtons.forEach(operatorButtons => {
-    operatorButtons.addEventListener('click', () => {
-        displayValue.textContent = operatorButtons.value
-        console.log(operatorButtons.value);
-    });
- });
+    function runCalculation() {
+        equalsButton.addEventListener('click', function() {
+            num1 = parseFloat(num1);
+            num2 = parseFloat(num2);
+            displayValue.textContent = operate(num1, num2, operator);
+        })
+    }
 
+    getNumbersClicked();
+    getOperator();
+    runCalculation(); 
 
-
-
-
-
-
+}
+runCalculator();
 
 
 
