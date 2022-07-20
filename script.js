@@ -3,7 +3,7 @@ const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const allClearButton = document.querySelector('.all-clear');
 const displayValue = document.querySelector('.display');
-const deleteButton = document.querySelector('.delete')
+const percentButton = document.querySelector('.percent')
 const equalsButton = document.querySelector('.equals');
 
 // Global variables
@@ -11,10 +11,10 @@ const equalsButton = document.querySelector('.equals');
 let num1 = ""
 let num2 = ""
 let operator = ""
-let savedFirstNumber = ""
+let savedNumber = ""
 let tempNum1Array = []
 let tempNum2Array = []
-let tempOperatorArray = []
+let result = null
 
 // Math functions for adding, subtracting, multiplying, and dividing
 
@@ -32,7 +32,7 @@ const multiply = function(num1, num2) {
 
 const divide = function(num1, num2) {
     if( num2 == 0 ){
-        return "Error: You can't divide by 0. Press AC and try again"
+        return "Error: Try again"
     } else {
         return num1 / num2
     }
@@ -57,25 +57,29 @@ function operate(num1, num2, operator) {
   };
 
 allClearButton.addEventListener('click', function() {
-    console.log("All clear");
     location.reload()
 });
 
-deleteButton.addEventListener('click', function() {
-    console.log("Delete");
-    // Needs ability to delete previous number only
-});
+function inputPercent() {
+    displayValue.innerHTML = (num1 / 100)
+}
+
+percentButton.addEventListener('click', function() {
+    inputPercent()
+})
 
 
 function runCalculator() {
-     // Number button click that returns the number
+     // Register which number has been clicked
     function getNumbersClicked() {
         numberButtons.forEach(numberButtons => {
             numberButtons.addEventListener('click', () => {
-                savedFirstNumber = numberButtons.value
+                savedNumber = numberButtons.value
+                console.log("Saved number is", savedNumber)
                 // Get first number before operator has been clicked
-                if (operator == "")  {
-                    tempNum1Array.push(savedFirstNumber);
+                if (operator === "") {
+                    tempNum1Array.push(savedNumber);
+                    console.log("Temp Num1 Array included", tempNum1Array)
                     num1 = tempNum1Array.join("");
                     displayValue.innerHTML = num1;
                 } 
@@ -83,7 +87,8 @@ function runCalculator() {
                 else {
 
                 // Get second number after operator has been clicked
-                    tempNum2Array.push(savedFirstNumber);
+                    tempNum2Array.push(savedNumber);
+                    console.log("Temp Num2 Array included", tempNum2Array)
                     num2 = tempNum2Array.join("");
                     displayValue.innerHTML = num2;
                 }
@@ -91,24 +96,32 @@ function runCalculator() {
             });
         });
     }    
-// Operator button click return the operator
+    // Register which operator has been clicked
     function getOperator() {   
         operatorButtons.forEach(operatorButtons => {
             operatorButtons.addEventListener('click', () => {
                 operator = operatorButtons.value
-                displayValue.textContent = operatorButtons.value
-                tempOperatorArray.push(operator);
+                displayValue.innerHTML = operator
             });
         });
     }
 
     function runCalculation() {
         equalsButton.addEventListener('click', function() {
-            num1 = parseFloat(num1);
+            tempNum2Array = []
             num2 = parseFloat(num2);
-            displayValue.textContent = operate(num1, num2, operator);
+            if (result != null) { 
+                num1 = result
+            }
+            else {
+                num1 = parseFloat(num1);
+            }
+            result = operate(num1, num2, operator);
+            displayValue.innerHTML = result
         })
     }
+
+
 
     getNumbersClicked();
     getOperator();
@@ -121,17 +134,7 @@ runCalculator();
 
 
 
-
-
-
-
-
-
-
- /*
-for (let i = 0; i < numberButtons.length; i++) {
-    numberButtons[i].addEventListener("click", function () {
-        console.log(this.innerHTML)
-    });
-}
-*/
+/*
+if(displayValue.length > 10) {
+    display.innerText = displayValue.substring(0, 10);
+    */
