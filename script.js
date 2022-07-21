@@ -12,9 +12,10 @@ let num1 = ""
 let num2 = ""
 let operator = ""
 let savedNumber = ""
+let result = ""
 let tempNum1Array = []
 let tempNum2Array = []
-let result = null
+let tempOperatorArray = []
 
 // Math functions for adding, subtracting, multiplying, and dividing
 
@@ -61,7 +62,8 @@ allClearButton.addEventListener('click', function() {
 });
 
 function inputPercent() {
-    displayValue.innerHTML = (num1 / 100)
+    let percentResult = (num1 / 100).toString()
+    displayValue.innerText = percentResult
 }
 
 percentButton.addEventListener('click', function() {
@@ -79,20 +81,19 @@ function runCalculator() {
                 // Get first number before operator has been clicked
                 if (operator === "") {
                     tempNum1Array.push(savedNumber);
-                    console.log("Temp Num1 Array included", tempNum1Array)
+                    console.log("Temp Num1 Array includes", tempNum1Array)
                     num1 = tempNum1Array.join("");
-                    displayValue.innerHTML = num1;
+                    displayValue.innerText = num1;
                 } 
-                
+
                 else {
 
                 // Get second number after operator has been clicked
                     tempNum2Array.push(savedNumber);
-                    console.log("Temp Num2 Array included", tempNum2Array)
+                    console.log("Temp Num2 Array includes", tempNum2Array)
                     num2 = tempNum2Array.join("");
-                    displayValue.innerHTML = num2;
+                    displayValue.innerText = num2;
                 }
-
             });
         });
     }    
@@ -101,23 +102,36 @@ function runCalculator() {
         operatorButtons.forEach(operatorButtons => {
             operatorButtons.addEventListener('click', () => {
                 operator = operatorButtons.value
-                displayValue.innerHTML = operator
+                console.log("Operator selected is:", operator)
+                displayValue.innerText = operator
+                tempOperatorArray.push(operator);
+
+                if ((tempNum1Array != "") && (tempNum2Array != "")) {
+                    num1 = parseFloat(num1);
+                    num2 = parseFloat(num2);
+                    let tempOperator = tempOperatorArray[tempOperatorArray.length - 2].toString();
+                    console.log("Running STRING calculation now!");
+                    result = operate(num1, num2, tempOperator);
+                    displayValue.innerText = result
+                    tempNum1Array = [];
+                    tempNum2Array = [];
+                    num1 = 0;
+                    num2 = 0;
+                    console.log("~~Temp Num1 Array includes:", tempNum1Array)
+                    tempNum1Array.push(result);
+                    console.log("~~Temp Num1 Array NOW includes:", tempNum1Array)
+                    num1 = tempNum1Array.join("");
+                }
             });
         });
     }
 
     function runCalculation() {
         equalsButton.addEventListener('click', function() {
-            tempNum2Array = []
+            console.log("Num2 Array has been cleared")
+            num1 = parseFloat(num1);
             num2 = parseFloat(num2);
-            if (result != null) { 
-                num1 = result
-            }
-            else {
-                num1 = parseFloat(num1);
-            }
-            result = operate(num1, num2, operator);
-            displayValue.innerHTML = result
+            displayValue.innerText = operate(num1, num2, operator);
         })
     }
 
@@ -130,11 +144,8 @@ function runCalculator() {
 }
 runCalculator();
 
-
-
-
-
 /*
 if(displayValue.length > 10) {
     display.innerText = displayValue.substring(0, 10);
     */
+
